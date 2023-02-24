@@ -1,13 +1,49 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import Dropdown from '@/Components/Navigation/Dropdown.vue';
+import DropdownLink from '@/Components/Navigation/DropdownLink.vue';
+import NavLink from '@/Components/Navigation/NavLink.vue';
+import ResponsiveNavLink from '@/Components/Navigation/ResponsiveNavLink.vue';
+import {isEmpty} from "lodash";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 const showingNavigationDropdown = ref(false);
+
+const props = defineProps({
+    header: {
+        type: String,
+        required: false,
+        default: null,
+    }
+});
+
+const RAW_MAIN_MENU_ITEMS = [
+    {
+        title: 'Главная',
+        route: 'dashboard',
+        // checkRoute: '',
+    },
+    {
+        title: 'Админка',
+        route: 'admin.main',
+        forAdmin: true,
+    },
+];
+
+const MAIN_MENU_ITEMS = computed(() =>
+    RAW_MAIN_MENU_ITEMS.filter((item) =>
+        !item.forAdmin || usePage().props.value.auth.user.role === 'admin'
+    )
+);
+
+const USER_MENU_ITEMS = [
+    {
+        title: 'Выход',
+        route: 'logout',
+        // checkRoute: '',
+    },
+];
 </script>
 
 <template>
@@ -20,32 +56,38 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
+                                <nav-link :href="route('dashboard')">
+                                    <application-logo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
-                                </Link>
+                                </nav-link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
+                                <nav-link
+                                    v-for="item in MAIN_MENU_ITEMS"
+                                    :key="item.route"
+                                    :href="route(item.route)"
+                                    :active="route().current(item.checkRoute ?? item.route)"
+                                >
+                                    {{ item.title }}
+                                </nav-link>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
-                                <Dropdown align="right" width="48">
+                                <dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {{ $page.props.auth.user.name }}
+                                                <span>{{ $page.props.auth.user.name }}</span>
+                                                <span v-if="$page.props.auth.user.role === 'admin'"> (админ)</span>
 
                                                 <svg
                                                     class="ml-2 -mr-0.5 h-4 w-4"
@@ -64,12 +106,17 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </DropdownLink>
+                                        <dropdown-link
+                                            v-for="item in USER_MENU_ITEMS"
+                                            :key="item.route"
+                                            :href="route(item.route)"
+                                            :active="route().current(item.checkRoute ?? item.route)"
+                                            method="post" as="button"
+                                        >
+                                            {{ item.title }}
+                                        </dropdown-link>
                                     </template>
-                                </Dropdown>
+                                </dropdown>
                             </div>
                         </div>
 
@@ -112,9 +159,14 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
+                        <responsive-nav-link
+                            v-for="item in MAIN_MENU_ITEMS"
+                            :key="item.route"
+                            :href="route(item.route)"
+                            :active="route().current(item.checkRoute ?? item.route)"
+                        >
+                            {{ item.title }}
+                        </responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -123,29 +175,44 @@ const showingNavigationDropdown = ref(false);
                             <div class="font-medium text-base text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.login }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </ResponsiveNavLink>
+                            <responsive-nav-link
+                                v-for="item in USER_MENU_ITEMS"
+                                :key="item.route"
+                                :href="route(item.route)"
+                                :active="route().current(item.checkRoute ?? item.route)"
+                                method="post"
+                                as="button"
+                            >
+                                {{ item.title }}
+                            </responsive-nav-link>
                         </div>
                     </div>
                 </div>
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <header class="bg-white shadow" v-if="!isEmpty($slots.header) || !isEmpty(header)">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot
+                        v-if="isEmpty(header)"
+                        name="header"
+                    />
+                    <h2
+                        v-else
+                        class="font-semibold text-xl text-gray-800 leading-tight"
+                    >
+                        {{ header }}
+                    </h2>
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
-                <slot />
+            <main class="max-w-7xl mx-auto">
+                <slot/>
             </main>
         </div>
     </div>

@@ -1,15 +1,16 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageTitle from "@/Components/PageTitle.vue";
 import CardBlock from "@/Components/CardBlock.vue";
+
 </script>
 
 <template>
-    <page-title title="Дашборд" />
+    <page-title title="Админка"/>
 
-    <authenticated-layout header="Главная страница">
+    <authenticated-layout header="Админка">
         <card-block class="my-4">
-            Главная страница
+            Админка
         </card-block>
     </authenticated-layout>
 </template>

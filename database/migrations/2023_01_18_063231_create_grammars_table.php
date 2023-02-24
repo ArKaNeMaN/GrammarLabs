@@ -8,21 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('users', static function (Blueprint $table): void {
+        Schema::create('grammars', static function (Blueprint $table): void {
             $table->id();
-
-            $table->string('login')->unique();
-            $table->string('password');
-
-            $table->string('name');
-            $table->string('role');
-
+            $table->string('terms');
+            $table->string('non_terms');
+            $table->json('rules');
+            $table->string('root_term');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('grammars');
     }
 };
