@@ -21,7 +21,9 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json
 RUN npm i
 
-COPY . .
+COPY node_modules node_modules
+COPY resources resources
+COPY public public
 COPY --from=composer ${APP_PATH}/vendor/tightenco/ziggy/dist/vue.m.js ./vendor/tightenco/ziggy/dist/vue.m.js
 
 RUN npm run build
