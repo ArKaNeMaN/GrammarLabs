@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GrammarController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -17,9 +18,27 @@ Route::middleware('auth')->group(static function () {
         ->name('logout');
 });
 
-Route::middleware(['auth', 'can:admin'])->group(static function () {
-    Route::get('admin', AdminController::class)
+Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function () {
+    Route::get('/', AdminController::class)
         ->name('admin.main');
+
+    Route::delete('grammars/{grammar}', [AdminController::class, 'removeGrammar'])
+        ->name('admin.grammars.remove');
+
+
+    Route::get('grammars/create', [GrammarController::class, 'show'])
+        ->name('admin.grammars.create');
+
+    Route::post('grammars/create', [GrammarController::class, 'save'])
+        ->name('admin.grammars.create');
+
+
+    Route::get('grammars/{grammar}', [GrammarController::class, 'show'])
+        ->name('admin.grammars.edit');
+
+    Route::put('grammars/{grammar}', [GrammarController::class, 'save'])
+        ->name('admin.grammars.edit');
+
 });
 
 Route::middleware('guest')->group(function () {

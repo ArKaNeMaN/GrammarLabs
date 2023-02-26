@@ -36,7 +36,7 @@ const dynClasses = computed(() => {
 
 <template>
     <input
-        class="focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm py-1 px-2"
+        class="focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm py-1 px-2 border"
         :class="dynClasses"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"

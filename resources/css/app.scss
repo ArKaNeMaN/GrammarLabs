@@ -2,4 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.table {
+    @apply border-collapse;
 
+    thead tr {
+        @apply border-b border-gray-200;
+    }
+
+    tbody tr:not(:last-child) {
+        @apply border-b border-gray-200;
+    }
+
+    thead {
+        @apply font-semibold;
+    }
+
+    th, td {
+        @apply py-2 px-3;
+    }
+}
