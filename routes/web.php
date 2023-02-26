@@ -29,15 +29,13 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
     Route::get('grammars/create', [GrammarController::class, 'show'])
         ->name('admin.grammars.create');
 
-    Route::post('grammars/create', [GrammarController::class, 'save'])
-        ->name('admin.grammars.create');
+    Route::post('grammars/create', [GrammarController::class, 'save']);
 
 
     Route::get('grammars/{grammar}', [GrammarController::class, 'show'])
         ->name('admin.grammars.edit');
 
-    Route::put('grammars/{grammar}', [GrammarController::class, 'save'])
-        ->name('admin.grammars.edit');
+    Route::put('grammars/{grammar}', [GrammarController::class, 'save']);
 
 });
 
