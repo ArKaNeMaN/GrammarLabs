@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -29,10 +30,11 @@ class RegisterController
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::factory()->create([
+        $user = User::create([
             'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
+            'role' => UserRole::STUDENT,
         ]);
 
         event(new Registered($user));

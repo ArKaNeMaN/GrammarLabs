@@ -16,10 +16,11 @@ class CreateAdminCommand extends Command
     {
         $pass = $this->option('password');
 
-        $user = User::factory()->admin()->create([
+        $user = User::create([
             'name' => $this->option('name'),
             'login' => $this->option('login'),
             'password' => Hash::make($pass),
+            'role' => UserRole::ADMIN,
         ]);
 
         $this->info('Учётная запись администратора создана:');
