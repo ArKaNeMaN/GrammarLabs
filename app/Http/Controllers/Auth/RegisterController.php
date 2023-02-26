@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserRole;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;

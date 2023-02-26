@@ -11,10 +11,11 @@ services:
             LETSENCRYPT_HOST: ${APP_VIRTUAL_HOST:-grammars.arkan1.ru}
             APP_KEY: 'base64:F0cLPXEhrp+9k8Qo+sMR1/2TYUPhb+LkIivNuMBll3w='
             APP_URL: 'https://${APP_VIRTUAL_HOST:-grammars.arkan1.ru}'
-            APP_DEBUG: 'false'
+            APP_DEBUG: 'true'
             APP_ENV: 'production'
 
             DB_CONNECTION: sqlite
+            DB_DATABASE: storage/database.sqlite
 
         restart: unless-stopped
         volumes:
