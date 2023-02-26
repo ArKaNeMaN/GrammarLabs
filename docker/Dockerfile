@@ -10,7 +10,8 @@ COPY composer.lock composer.lock
 RUN composer install \
     --no-interaction \
     --no-plugins \
-    --no-scripts
+    --no-scripts \
+    --no-dev
 
 FROM node:lts-alpine3.15 as npm
 ARG APP_PATH
