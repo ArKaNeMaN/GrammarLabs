@@ -21,9 +21,12 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json
 RUN npm i
 
-COPY ./node_modules ./node_modules
 COPY ./resources ./resources
 COPY ./public ./public
+COPY ./tailwind.config.js ./tailwind.config.js
+COPY ./vite.config.js ./vite.config.js
+COPY ./postcss.config.js ./postcss.config.js
+COPY ./jsconfig.json ./jsconfig.json
 COPY --from=composer ${APP_PATH}/vendor/tightenco/ziggy/dist/vue.m.js ./vendor/tightenco/ziggy/dist/vue.m.js
 
 RUN npm run build
