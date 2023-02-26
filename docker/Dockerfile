@@ -1,6 +1,6 @@
 ARG APP_PATH='/app'
 
-FROM composer:2.4.2 as composer
+FROM composer:2 as composer
 ARG APP_PATH
 WORKDIR ${APP_PATH}
 
@@ -25,7 +25,7 @@ COPY --from=composer ${APP_PATH}/vendor/tightenco/ziggy/dist/vue.m.js ./vendor/t
 
 RUN npm run build
 
-FROM php:8.1.11-apache-buster
+FROM php:8.2-apache-buster
 ARG APP_PATH
 WORKDIR ${APP_PATH}
 
