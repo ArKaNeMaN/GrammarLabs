@@ -15,7 +15,7 @@ services:
             APP_ENV: 'production'
 
             DB_CONNECTION: sqlite
-            DB_DATABASE: storage/database.sqlite
+            DB_DATABASE: /app/storage/database.sqlite
 
         restart: unless-stopped
         volumes:
