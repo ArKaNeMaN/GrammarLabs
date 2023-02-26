@@ -39,6 +39,12 @@ function onSubmit() {
         form.put(route('admin.grammars.edit', props.grammar.id));
     }
 }
+
+function removeArrayItem(arr, index) {
+    let res = [...arr];
+    res.splice(index, 1);
+    return res;
+}
 </script>
 
 <template>
@@ -91,7 +97,13 @@ function onSubmit() {
                         v-for="(ignored__rule, i) in form.rules"
                         class="flex items-center"
                     >
-                        <text-input v-model.trim="form.rules[i].left" class="w-32"/>
+                        <div class="flex">
+                            <secondary-button
+                                class="rounded-r-none"
+                                @click="form.rules = removeArrayItem(form.rules, i)"
+                            >-</secondary-button>
+                            <text-input v-model.trim="form.rules[i].left" class="w-32 rounded-l-none border-l-0"/>
+                        </div>
                         <code> → </code>
                         <text-inputs-list v-model="form.rules[i].rights" input-class="w-32" separator="|"/>
                     </div>
