@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+
+        environment:
+            VIRTUAL_HOST: ${APP_VIRTUAL_HOST:-grammars.arkan1.ru}
+            LETSENCRYPT_HOST: ${APP_VIRTUAL_HOST:-grammars.arkan1.ru}
+            APP_KEY: 'base64:F0cLPXEhrp+9k8Qo+sMR1/2TYUPhb+LkIivNuMBll3w='
+            APP_URL: 'https://${APP_VIRTUAL_HOST:-grammars.arkan1.ru}'
+            APP_DEBUG: 'false'
+            APP_ENV: 'production'
+
+            DB_CONNECTION: sqlite
+
+        restart: unless-stopped
+        volumes:
+            - 'app-storage:/app/storage'
+        networks:
+            - proxy
+
+volumes:
+    app-storage: { }
+
+networks:
+    proxy:
+        external:
+            name: ${PROXY_NETWORK_NAME:-main-proxy}
