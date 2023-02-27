@@ -9,6 +9,7 @@ import TextInput from "@/Components/Form/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInputsList from "@/Components/Form/TextInputsList.vue";
+import Ln from "@/Components/Navigation/ln.vue";
 
 const props = defineProps({
     grammar: {
@@ -49,8 +50,13 @@ function removeArrayItem(arr, index) {
 
 <template>
     <authenticated-layout :header="headerText">
+        <card-block class="mt-4">
+            <ln :href="route('admin.grammars.list.show')">
+                <secondary-button>← К списку грамматик</secondary-button>
+            </ln>
+        </card-block>
         <form @submit.prevent="onSubmit">
-            <card-block class="my-4">
+            <card-block class="mt-4">
                 <h3 class="text-lg font-semibold mb-2">Параметры</h3>
 
                 <div class="space-y-4">
@@ -87,7 +93,7 @@ function removeArrayItem(arr, index) {
                     </form-field>
                 </div>
             </card-block>
-            <card-block class="my-4">
+            <card-block class="mt-4">
                 <h3 class="text-lg font-semibold mb-2">Правила</h3>
 
                 <p class="text-gray-500">Символ <code>-</code> в правой части означает пустую строку</p>

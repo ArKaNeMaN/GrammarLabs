@@ -18,6 +18,18 @@
     }
 
     th, td {
-        @apply py-2 px-3;
+        @apply py-2 px-3 text-left;
+    }
+}
+
+.pagination {
+    @apply flex flex-nowrap flex-row space-x-0;
+
+    & > *:not(:last-child) {
+        @apply rounded-r-none border-r-0;
+    }
+
+    & > *:not(:first-child) {
+        @apply rounded-l-none;
     }
 }

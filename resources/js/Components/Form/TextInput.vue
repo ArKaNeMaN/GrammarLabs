@@ -13,6 +13,11 @@ const props = defineProps({
         required: false,
         default: null,
     },
+    placeholder: {
+        type: String,
+        required: false,
+        default: '',
+    },
 });
 
 defineEmits(['update:modelValue']);

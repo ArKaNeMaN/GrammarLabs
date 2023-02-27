@@ -12,7 +12,7 @@ class GrammarController
 {
     public function show(Grammar $grammar): Response
     {
-        return Inertia::render('Admin/GrammarEdit', [
+        return Inertia::render('Admin/Grammars/GrammarEdit', [
             'grammar' => $grammar->exists ? $grammar : null,
         ]);
     }
