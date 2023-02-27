@@ -21,7 +21,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import CardBlock from "@/Components/CardBlock.vue";
-import UsersListCard from "@/Pages/Admin/Components/UsersListCard.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
 

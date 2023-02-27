@@ -70,10 +70,7 @@ import axios from "axios";
 import {dateFormat} from "@/utils";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import Ln from "@/Components/Navigation/ln.vue";
 import {isEmpty} from "lodash";
-import Dropdown from "@/Components/Navigation/Dropdown.vue";
-import DropdownLink from "@/Components/Navigation/DropdownLink.vue";
 import Pagination from "@/Components/Navigation/Pagination.vue";
 
 const props = defineProps({

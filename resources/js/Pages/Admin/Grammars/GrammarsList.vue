@@ -1,5 +1,4 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageTitle from "@/Components/PageTitle.vue";
 import CardBlock from "@/Components/CardBlock.vue";
 import DangerButton from "@/Components/DangerButton.vue";
