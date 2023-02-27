@@ -17,9 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 
-# Project exclude paths
-/storage/
-
 /.run
 
 .phpstorm.meta.php
