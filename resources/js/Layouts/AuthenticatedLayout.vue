@@ -39,9 +39,13 @@ const MAIN_MENU_ITEMS = computed(() =>
 
 const USER_MENU_ITEMS = [
     {
+        title: 'Ред. профиля',
+        route: 'user.profile.edit.show',
+        // checkRoute: '',
+    },
+    {
         title: 'Выход',
         route: 'logout',
-        // checkRoute: '',
     },
 ];
 </script>

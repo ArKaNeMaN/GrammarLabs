@@ -8,13 +8,19 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Profile\ProfileEditController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class);
 
 Route::middleware('auth')->group(static function () {
-    Route::get('/dashboard', DashboardController::class)
+    Route::get('dashboard', DashboardController::class)
         ->name('dashboard');
+
+    Route::get('profile/edit', [ProfileEditController::class, 'show'])
+        ->name('user.profile.edit.show');
+    Route::put('profile/edit', [ProfileEditController::class, 'save'])
+        ->name('user.profile.edit.save');
 
     Route::post('logout', [LoginController::class, 'logout'])
         ->name('logout');
