@@ -1,6 +1,7 @@
 <template>
-    <div class="flex justify-between items-center">
-        <p class="text-sm text-gray-500">Страница {{ data.current_page }}</p>
+    <div class="flex justify-center items-center">
+        <p class="text-sm text-gray-500 md:block hidden">Страница {{ data.current_page }}</p>
+        <span class="flex-grow"></span>
         <div class="pagination">
             <secondary-button
                 @click="emit('update:page', data.current_page - 1)"
@@ -52,7 +53,8 @@
                 →
             </secondary-button>
         </div>
-        <p class="text-sm text-gray-500">Всего страниц {{ data.last_page }}</p>
+        <span class="flex-grow"></span>
+        <p class="text-sm text-gray-500 md:block hidden">Всего страниц {{ data.last_page }}</p>
     </div>
 </template>
 
