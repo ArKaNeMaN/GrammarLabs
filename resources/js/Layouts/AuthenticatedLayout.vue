@@ -46,6 +46,7 @@ const USER_MENU_ITEMS = [
     {
         title: 'Выход',
         route: 'logout',
+        method: 'post',
     },
 ];
 </script>
@@ -115,7 +116,8 @@ const USER_MENU_ITEMS = [
                                             :key="item.route"
                                             :href="route(item.route)"
                                             :active="route().current(item.checkRoute ?? item.route)"
-                                            method="post" as="button"
+                                            :method="item.method ?? 'get'"
+                                            as="button"
                                         >
                                             {{ item.title }}
                                         </dropdown-link>
@@ -188,7 +190,7 @@ const USER_MENU_ITEMS = [
                                 :key="item.route"
                                 :href="route(item.route)"
                                 :active="route().current(item.checkRoute ?? item.route)"
-                                method="post"
+                                :method="item.method ?? 'get'"
                                 as="button"
                             >
                                 {{ item.title }}
