@@ -21,6 +21,7 @@ const props = defineProps({
 });
 
 const form = useForm(props.grammar ?? {
+    name: '',
     terms: '',
     non_terms: 'S',
     rules: [
@@ -32,7 +33,11 @@ const form = useForm(props.grammar ?? {
     root_term: 'S',
 });
 
-const headerText = computed(() => isEmpty(props.grammar) ? 'Создание грамматики' : `Редактирование грамматики №${props.grammar.id}`);
+const headerText = computed(() =>
+    isEmpty(props.grammar)
+        ? 'Создание грамматики'
+        : `Редактирование грамматики '${props.grammar.name}'`
+);
 
 function onSubmit() {
     if (isEmpty(props.grammar)) {
@@ -63,6 +68,17 @@ function removeArrayItem(arr, index) {
                 <h3 class="text-lg font-semibold mb-2">Параметры</h3>
 
                 <div class="space-y-4">
+                    <form-field label="Название" class="mb-6">
+                        <text-input
+                            class="w-full"
+                            v-model.trim="form.name"
+                            :error="form.errors.name"
+                            placeholder="Введите название грамматики"
+                            required
+                            autofocus
+                        />
+                    </form-field>
+
                     <form-field label="Терминалы">
                         <text-input
                             class="w-full"
@@ -70,7 +86,6 @@ function removeArrayItem(arr, index) {
                             :error="form.errors.terms"
                             placeholder="Введите терминальные символы без разделителей"
                             required
-                            autofocus
                         />
                     </form-field>
 
@@ -99,7 +114,7 @@ function removeArrayItem(arr, index) {
             <card-block class="mt-4">
                 <h3 class="text-lg font-semibold mb-2">Правила</h3>
 
-                <p class="text-gray-500">Символ <code>-</code> в правой части означает пустую строку</p>
+                <p class="text-gray-500">Символ <code>"-"</code> в правой части означает пустую строку</p>
 
                 <div class="space-y-4">
                     <div
@@ -110,13 +125,14 @@ function removeArrayItem(arr, index) {
                             <secondary-button
                                 class="rounded-r-none"
                                 @click="form.rules = removeArrayItem(form.rules, i)"
-                            >-</secondary-button>
+                            >-
+                            </secondary-button>
                             <text-input v-model.trim="form.rules[i].left" class="w-32 rounded-l-none border-l-0"/>
                         </div>
                         <code> → </code>
                         <text-inputs-list v-model="form.rules[i].rights" input-class="w-32" separator="|"/>
                     </div>
-                    <secondary-button @click="form.rules.push({left: '', rights: ['']})">Добавить</secondary-button>
+                    <secondary-button @click="form.rules.push({left: '', rights: ['']})">Добавить правило</secondary-button>
                 </div>
 
                 <p v-if="!isEmpty(form.errors.rules)" class="text-sm text-red-600 mt-0.5">{{ form.errors.rules }}</p>

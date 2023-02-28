@@ -91,13 +91,13 @@ const USER_MENU_ITEMS = [
                                                 type="button"
                                                 class="inline-flex items-center px-3 my-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                <div class="flex flex-col items-start mr-4 text-left">
-                                                    <div>
+                                                <span class="flex flex-col items-start mr-4 text-left">
+                                                    <span>
                                                         <span>{{ $page.props.auth.user.name }}</span>
                                                         <span v-if="$page.props.auth.user.role === 'admin'"> (админ)</span>
-                                                    </div>
-                                                    <div class="font-light text-sm text-gray-500">{{ $page.props.auth.user.group_name }}</div>
-                                                </div>
+                                                    </span>
+                                                    <span class="font-light text-sm text-gray-500">{{ $page.props.auth.user.group_name }}</span>
+                                                </span>
 
                                                 <svg
                                                     class="ml-2 -mr-0.5 h-4 w-4"

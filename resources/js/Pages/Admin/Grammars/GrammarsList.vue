@@ -46,6 +46,7 @@ function onGrammarRemove(grammar) {
                 <thead>
                 <tr>
                     <td>№</td>
+                    <td>Название</td>
                     <td>Терминалы</td>
                     <td>Нетерминалы</td>
                     <td>Стартовый нетерминал</td>
@@ -59,6 +60,7 @@ function onGrammarRemove(grammar) {
                     :key="g.id"
                 >
                     <td>{{ g.id }}</td>
+                    <td>{{ g.name }}</td>
                     <td>{{ g.terms }}</td>
                     <td>{{ g.non_terms }}</td>
                     <td>{{ g.root_term }}</td>

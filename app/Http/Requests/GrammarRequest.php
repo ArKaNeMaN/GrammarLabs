@@ -13,6 +13,7 @@ class GrammarRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => ['required', 'string', 'max:255'],
             'terms' => ['required', 'string', 'min:1', new CharsSet()],
             'non_terms' => ['required', 'string', 'min:1', new CharsSet(), new NotIncludedCharsFrom('terms')],
             'root_term' => ['required', 'string', 'size:1', new ContainsOnlyFrom('non_terms')],

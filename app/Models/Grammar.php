@@ -11,6 +11,7 @@ class Grammar extends Model
     protected $table = 'grammars';
 
     protected $fillable = [
+        'name',
         'terms',
         'non_terms',
         'rules',
