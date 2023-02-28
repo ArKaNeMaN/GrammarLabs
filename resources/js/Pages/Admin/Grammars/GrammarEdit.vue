@@ -10,6 +10,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInputsList from "@/Components/Form/TextInputsList.vue";
 import Ln from "@/Components/Navigation/ln.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 
 const props = defineProps({
     grammar: {
@@ -49,6 +50,8 @@ function removeArrayItem(arr, index) {
 </script>
 
 <template>
+    <page-title :title="headerText"/>
+
     <authenticated-layout :header="headerText">
         <card-block class="mt-4">
             <ln :href="route('admin.grammars.list.show')">
