@@ -25,6 +25,7 @@ class ProfileEditController
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'group_name' => ['required', 'string', 'max:255'],
             'password' => ['nullable', 'confirmed', Password::defaults()],
         ]);
 
@@ -32,6 +33,7 @@ class ProfileEditController
         $user = $request->user();
 
         $user->name = $data['name'];
+        $user->group_name = $data['group_name'];
         if (!empty($data['password'])) {
             $user->password = Hash::make($data['password']);
         }

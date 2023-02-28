@@ -12,6 +12,15 @@
                         autocomplete="name"
                     />
                 </form-field>
+                <form-field label="Группа">
+                    <text-input
+                        v-model="form.group_name"
+                        placeholder="Введите новое название группы"
+                        :error="form.errors.group_name"
+                        class="w-full"
+                        autocomplete="group"
+                    />
+                </form-field>
 
                 <form-field label="Пароль" class="mt-4">
                     <text-input
@@ -50,6 +59,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const form = useForm({
     name: usePage().props.value.auth.user.name,
+    group_name: usePage().props.value.auth.user.group_name,
     password: '',
     password_confirmation: '',
 });

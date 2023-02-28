@@ -21,6 +21,7 @@ class CreateAdminCommand extends Command
             'login' => $this->option('login'),
             'password' => Hash::make($pass),
             'role' => UserRole::ADMIN,
+            'group_name' => 'Преподаватель',
         ]);
 
         $this->info('Учётная запись администратора создана:');

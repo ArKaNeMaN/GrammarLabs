@@ -25,6 +25,7 @@ class RegisterController
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'group_name' => ['required', 'string', 'max:255'],
             'login' => ['required', 'string', 'min:6', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

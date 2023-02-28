@@ -9,6 +9,7 @@ import NavLink from "@/Components/Navigation/NavLink.vue";
 
 const form = useForm({
     name: '',
+    group_name: '',
     login: '',
     password: '',
     password_confirmation: '',
@@ -35,6 +36,18 @@ const submit = () => {
                     autofocus
                     autocomplete="name"
                     :error="form.errors.name"
+                />
+            </form-field>
+            <form-field label="Группа">
+                <text-input
+                    type="text"
+                    v-model="form.group_name"
+                    class="w-full"
+                    required
+                    autofocus
+                    autocomplete="group"
+                    :error="form.errors.group_name"
+                    placeholder="Введите название учебной группы"
                 />
             </form-field>
             <form-field label="Логин">

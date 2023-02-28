@@ -68,7 +68,7 @@ function removeArrayItem(arr, index) {
                             class="w-full"
                             v-model.trim="form.terms"
                             :error="form.errors.terms"
-                            placeholder="Введите терминальные символы без разделитилей"
+                            placeholder="Введите терминальные символы без разделителей"
                             required
                             autofocus
                         />
@@ -79,7 +79,7 @@ function removeArrayItem(arr, index) {
                             class="w-full"
                             v-model.trim="form.non_terms"
                             :error="form.errors.non_terms"
-                            placeholder="Введите нетерминальные символы без разделитилей"
+                            placeholder="Введите нетерминальные символы без разделителей"
                             required
                         />
                     </form-field>
