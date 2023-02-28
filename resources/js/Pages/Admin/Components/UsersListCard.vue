@@ -22,7 +22,7 @@
             >Найти</primary-button>
         </form>
 
-        <div class=" overflow-y-visible mt-2">
+        <div class="overflow-auto mt-2">
             <table class="table w-full">
                 <thead>
                 <tr>
