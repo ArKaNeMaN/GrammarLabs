@@ -19,5 +19,6 @@ if [ "$env" != "local" ]; then
 fi
 
 php artisan migrate --force
+chmod 777 storage/database.sqlite
 
 exec apache2-foreground
