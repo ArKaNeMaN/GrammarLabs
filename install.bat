@@ -12,4 +12,6 @@ call "resources\scripts\install-deps"
 echo Installing app...
 call resources\run\scripts\install-app
 
+%ARTISAN% admin:create
+
 echo App installed.
