@@ -3,7 +3,7 @@
 call resources\run\scripts\config
 
 echo Uninstalling app and env...
-call resources\scripts\uninstall
+call resources\run\scripts\uninstall
 
 call install
 
