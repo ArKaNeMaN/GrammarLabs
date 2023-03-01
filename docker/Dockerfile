@@ -50,6 +50,4 @@ RUN a2enmod rewrite
 COPY docker/apache.conf /etc/apache2/sites-enabled
 RUN rm /etc/apache2/sites-enabled/000-default.conf
 
-RUN docker-php-ext-install mysqli pdo_mysql
-
 CMD ["/usr/local/bin/start-container"]
