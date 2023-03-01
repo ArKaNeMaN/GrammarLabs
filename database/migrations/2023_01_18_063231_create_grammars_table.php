@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('grammars', static function (Blueprint $table): void {
             $table->id();
+            $table->string('name');
             $table->string('terms');
             $table->string('non_terms');
             $table->json('rules');
