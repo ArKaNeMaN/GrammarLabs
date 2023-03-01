@@ -5,7 +5,7 @@ import CardBlock from "@/Components/CardBlock.vue";
 </script>
 
 <template>
-    <page-title title="Дашборд" />
+    <page-title title="Главная страница" />
 
     <authenticated-layout header="Главная страница">
         <card-block class="my-4">

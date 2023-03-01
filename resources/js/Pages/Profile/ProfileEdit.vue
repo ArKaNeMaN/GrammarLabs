@@ -1,4 +1,6 @@
 <template>
+    <page-title title="Редактирование профиля"/>
+
     <authenticated-layout header="Редактирование профиля">
         <card-block class="mt-4">
             <form @submit.prevent="onSubmit" class="md:w-[50%]">
@@ -56,6 +58,7 @@ import CardBlock from "@/Components/CardBlock.vue";
 import FormField from "@/Components/Form/FormField.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 
 const form = useForm({
     name: usePage().props.value.auth.user.name,
