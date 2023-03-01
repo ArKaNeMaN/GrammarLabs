@@ -18,4 +18,6 @@ if [ "$env" != "local" ]; then
     )
 fi
 
+php artisan migrate --force
+
 exec apache2-foreground
