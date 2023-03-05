@@ -1,5 +1,19 @@
+<template>
+  <select
+          class="focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm py-1 px-2 border"
+          :class="dynClasses"
+          :value="modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
+          ref="input"
+          v-bind="{...$props, ...$attrs}"
+  >
+      <slot/>
+  </select>
+    <p v-if="!isEmpty(error)" class="text-sm text-red-600 mt-0.5">{{ error }}</p>
+</template>
+
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from "vue";
 import {isEmpty} from "lodash";
 
 const props = defineProps({
@@ -12,11 +26,6 @@ const props = defineProps({
         type: String,
         required: false,
         default: null,
-    },
-    placeholder: {
-        type: String,
-        required: false,
-        default: '',
     },
 });
 
@@ -37,17 +46,5 @@ const dynClasses = computed(() => {
         ? 'border-gray-300'
         : 'border-red-600 border';
 });
-</script>
 
-<template>
-    <input
-        class="focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm py-1 px-2 border"
-        :class="dynClasses"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
-        ref="input"
-        type="text"
-        v-bind="{...$props, ...$attrs}"
-    >
-    <p v-if="!isEmpty(error)" class="text-sm text-red-600 mt-0.5">{{ error }}</p>
-</template>
+</script>

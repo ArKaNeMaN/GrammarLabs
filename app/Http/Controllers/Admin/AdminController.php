@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Grammar;
+use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -12,17 +13,15 @@ class AdminController
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Admin/Main', [
-            'grammars' => Grammar::query()->latest()->get(),
-        ]);
+        return Inertia::render('Admin/Main');
     }
 
     /**
      * @throws Throwable
      */
-    public function removeGrammar(Grammar $grammar): RedirectResponse
+    public function removeTask(Task $task): RedirectResponse
     {
-        $grammar->deleteOrFail();
+        $task->deleteOrFail();
 
         return redirect()->route('admin.main');
     }

@@ -4,7 +4,7 @@ import {isEmpty} from "lodash";
 
 const props = defineProps({
     modelValue: {
-        type: String,
+        type: Number,
         required: false,
         default: '',
     },
@@ -44,9 +44,9 @@ const dynClasses = computed(() => {
         class="focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm py-1 px-2 border"
         :class="dynClasses"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="$emit('update:modelValue', Number($event.target.value))"
         ref="input"
-        type="text"
+        type="number"
         v-bind="{...$props, ...$attrs}"
     >
     <p v-if="!isEmpty(error)" class="text-sm text-red-600 mt-0.5">{{ error }}</p>

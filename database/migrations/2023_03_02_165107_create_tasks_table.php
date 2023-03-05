@@ -8,19 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('grammars', static function (Blueprint $table): void {
+        Schema::create('tasks', static function (Blueprint $table): void {
             $table->id();
+
             $table->string('name');
-            $table->string('terms');
-            $table->string('non_terms');
-            $table->json('rules');
-            $table->string('root_term');
+            $table->string('type');
+
+            $table->json('params')
+                ->nullable();
+
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('grammars');
+        Schema::dropIfExists('tasks');
     }
 };

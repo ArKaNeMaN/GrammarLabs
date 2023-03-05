@@ -33,7 +33,7 @@ class ContainsOnlyFrom implements ValidationRule, DataAwareRule
 
     public function setData(array $data): static
     {
-        $this->from = str_split($data[$this->fromKey] ?? '');
+        $this->from = str_split(Arr::dot($data)[$this->fromKey] ?? '');
 
         return $this;
     }

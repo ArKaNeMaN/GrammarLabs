@@ -54,7 +54,10 @@ function removeArrayItem(arr, index) {
 </script>
 
 <template>
-    <div class="flex flex-wrap items-center">
+    <div
+        class="flex flex-wrap items-center"
+        v-bind="{...$props, ...$attrs}"
+    >
         <template v-for="(str, i) in valueProxy" :key="i">
             <span class="m-1 flex">
                 <text-input
@@ -66,6 +69,7 @@ function removeArrayItem(arr, index) {
                 <secondary-button
                     class="rounded-l-none"
                     @click="valueProxy = removeArrayItem(valueProxy, i)"
+                    type="button"
                 >-</secondary-button>
             </span>
             <span v-if="i + 1 < valueProxy.length">{{ separator }}</span>
@@ -73,6 +77,7 @@ function removeArrayItem(arr, index) {
         <secondary-button
             class="m-1"
             @click="valueProxy = [...valueProxy, defaultNew]"
+            type="button"
         >+</secondary-button>
     </div>
     <p v-if="!isEmpty(error)" class="text-sm text-red-600 mt-0.5">{{ error }}</p>

@@ -5,6 +5,7 @@ namespace App\Http\Validation\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Arr;
 
 class GrammarRules implements ValidationRule, DataAwareRule
 {
@@ -107,9 +108,10 @@ class GrammarRules implements ValidationRule, DataAwareRule
 
     public function setData(array $data): static
     {
-        $this->terms = str_split($data[$this->termsKey] ?? '');
-        $this->nonTerms = str_split($data[$this->nonTermsKey] ?? '');
-        $this->rootTerm = $data[$this->rootTermKey] ?? '';
+        $dotData = Arr::dot($data);
+        $this->terms = str_split($dotData[$this->termsKey] ?? '');
+        $this->nonTerms = str_split($dotData[$this->nonTermsKey] ?? '');
+        $this->rootTerm = $dotData[$this->rootTermKey] ?? '';
 
         return $this;
     }

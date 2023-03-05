@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\GrammarController;
-use App\Http\Controllers\Admin\GrammarsListController;
+use App\Http\Controllers\Admin\TaskController;
+use App\Http\Controllers\Admin\TasksListController;
 use App\Http\Controllers\Admin\UsersListController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -30,20 +30,20 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
     Route::get('/', AdminController::class)
         ->name('admin.main');
 
-    Route::prefix('grammars')->group(static function () {
-        Route::get('list', [GrammarsListController::class, 'show'])
-            ->name('admin.grammars.list.show');
+    Route::prefix('tasks')->group(static function () {
+        Route::get('list', [TasksListController::class, 'show'])
+            ->name('admin.tasks.list.show');
 
-        Route::delete('{grammar}', [AdminController::class, 'removeGrammar'])
-            ->name('admin.grammars.remove');
+        Route::delete('{task}', [AdminController::class, 'removeTask'])
+            ->name('admin.tasks.remove');
 
-        Route::get('create', [GrammarController::class, 'show'])
-            ->name('admin.grammars.create');
-        Route::post('create', [GrammarController::class, 'save']);
+        Route::get('create', [TaskController::class, 'show'])
+            ->name('admin.tasks.create');
+        Route::post('create', [TaskController::class, 'save']);
 
-        Route::get('{grammar}', [GrammarController::class, 'show'])
-            ->name('admin.grammars.edit');
-        Route::put('{grammar}', [GrammarController::class, 'save']);
+        Route::get('{task}', [TaskController::class, 'show'])
+            ->name('admin.tasks.edit');
+        Route::put('{task}', [TaskController::class, 'save']);
     });
 
     Route::prefix('users')->group(static function () {

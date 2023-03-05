@@ -3,27 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Grammar;
+use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Throwable;
 
-class GrammarsListController
+class TasksListController
 {
     public function show(): Response
     {
-        return Inertia::render('Admin/Grammars/GrammarsList', [
-            'grammars' => Grammar::query()->latest()->get(),
+        return Inertia::render('Admin/Tasks/TasksList', [
+            'tasks' => Task::query()->latest()->get(),
         ]);
     }
 
     /**
      * @throws Throwable
      */
-    public function removeGrammar(Grammar $grammar): RedirectResponse
+    public function removeTask(Task $grammar): RedirectResponse
     {
         $grammar->deleteOrFail();
 
-        return redirect()->route('admin.grammars.list.show');
+        return redirect()->route('admin.tasks.list.show');
     }
 }
