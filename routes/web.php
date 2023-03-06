@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AssignedTasksController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TasksListController;
 use App\Http\Controllers\Admin\UsersListController;
@@ -44,6 +45,11 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
         Route::get('{task}', [TaskController::class, 'show'])
             ->name('admin.tasks.edit');
         Route::put('{task}', [TaskController::class, 'save']);
+    });
+
+    Route::prefix('assigned-tasks')->group(static function () {
+        Route::get('list', [AssignedTasksController::class, 'show'])
+            ->name('admin.assigned-tasks.list.show');
     });
 
     Route::prefix('users')->group(static function () {

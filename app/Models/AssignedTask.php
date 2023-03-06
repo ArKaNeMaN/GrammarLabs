@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -25,4 +24,9 @@ class AssignedTask extends Pivot
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+//    public function answers(): BelongsTo
+//    {
+//        return $this->belongsTo(User::class, 'user_id');
+//    }
 }
