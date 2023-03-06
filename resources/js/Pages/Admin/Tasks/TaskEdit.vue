@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {computed, watch} from "vue";
+import {computed} from "vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import {isEmpty} from "lodash";
 import CardBlock from "@/Components/CardBlock.vue";
@@ -53,10 +53,6 @@ const form = useForm({
     },
 });
 
-watch(form, () => {
-    console.log(form)
-}, {deep: true});
-
 const headerText = computed(() =>
     isEmpty(props.task)
         ? 'Создание задания'
@@ -73,7 +69,7 @@ function onSubmit() {
 
 const TASK_TYPES = [
     'generate',
-    'reverse'
+    'reverse',
 ];
 
 function formatTaskType(type) {

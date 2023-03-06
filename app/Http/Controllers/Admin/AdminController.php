@@ -15,14 +15,4 @@ class AdminController
     {
         return Inertia::render('Admin/Main');
     }
-
-    /**
-     * @throws Throwable
-     */
-    public function removeTask(Task $task): RedirectResponse
-    {
-        $task->deleteOrFail();
-
-        return redirect()->route('admin.main');
-    }
 }

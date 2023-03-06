@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Infrastructure\Toast;
 use App\Models\Grammar;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
@@ -21,9 +22,14 @@ class TasksListController
     /**
      * @throws Throwable
      */
-    public function removeTask(Task $grammar): RedirectResponse
+    public function removeTask(Task $task): RedirectResponse
     {
-        $grammar->deleteOrFail();
+        try {
+            $task->deleteOrFail();
+            Toast::success('Задание успешно удалено');
+        } catch (Throwable) {
+            Toast::error('При удалении задания произошла ошибка');
+        }
 
         return redirect()->route('admin.tasks.list.show');
     }

@@ -10,9 +10,9 @@ const props = defineProps({
         required: true,
     },
     error: {
-        type: Boolean,
+        type: String,
         required: false,
-        default: false,
+        default: '',
     },
     inputClass: {
         type: String,
@@ -51,6 +51,12 @@ function removeArrayItem(arr, index) {
     return res;
 }
 
+function setItem(i, val) {
+    const newValue = [...valueProxy.value];
+    newValue[i] = val;
+    valueProxy.value = newValue;
+}
+
 </script>
 
 <template>
@@ -62,7 +68,7 @@ function removeArrayItem(arr, index) {
             <span class="m-1 flex">
                 <text-input
                     :value="str"
-                    @input="valueProxy[i] = $event.target.value"
+                    @input="setItem(i, $event.target.value)"
                     class="rounded-r-none border-r-0"
                     :class="inputClass"
                 />

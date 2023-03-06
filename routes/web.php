@@ -34,7 +34,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
         Route::get('list', [TasksListController::class, 'show'])
             ->name('admin.tasks.list.show');
 
-        Route::delete('{task}', [AdminController::class, 'removeTask'])
+        Route::delete('{task}', [TasksListController::class, 'removeTask'])
             ->name('admin.tasks.remove');
 
         Route::get('create', [TaskController::class, 'show'])

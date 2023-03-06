@@ -59,6 +59,7 @@ import FormField from "@/Components/Form/FormField.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import PageTitle from "@/Components/PageTitle.vue";
+import {useToast} from "vue-toastification";
 
 const form = useForm({
     name: usePage().props.value.auth.user.name,
@@ -72,7 +73,7 @@ function onSubmit() {
         onProgress: () => form.reset('password', 'password_confirmation'),
         onSuccess: () => {
             form.reset('password', 'password_confirmation');
-            alert('Профиль успешно обновлён.');
+            useToast().success('Профиль успешно обновлён');
         },
     });
 }

@@ -17,8 +17,12 @@
         @apply font-semibold;
     }
 
-    th, td {
-        @apply py-2 px-3 text-left;
+    th {
+        @apply text-left;
+    }
+
+    td, th {
+        @apply py-2 px-3;
     }
 }
 

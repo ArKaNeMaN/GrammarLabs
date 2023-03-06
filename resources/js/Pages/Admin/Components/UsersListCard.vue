@@ -36,7 +36,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="!isEmpty(users.data)">
                 <tr v-for="user in users.data" :key="user.id">
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
@@ -50,6 +50,11 @@
                     </td>
                 </tr>
                 </tbody>
+                <tr v-else>
+                    <td class="text-center" colspan="999">
+                        Пользователи не найдены
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -72,6 +77,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import {isEmpty} from "lodash";
 import Pagination from "@/Components/Navigation/Pagination.vue";
+import {useToast} from "vue-toastification";
 
 const props = defineProps({
     withSearch: {
@@ -85,6 +91,7 @@ const props = defineProps({
         default: false,
     },
 });
+const toast = useToast();
 
 const USER_ROLES_MAP = {
     admin: 'Администратор',
@@ -113,7 +120,12 @@ async function onUserRemove(user) {
         return;
     }
 
-    await axios.delete(route('admin.users.list.remove-user', user.id));
+    await axios.delete(route('admin.users.list.remove-user', user.id)).then(() => {
+        toast.success('Пользователь успешно удалён');
+    }).catch(() => {
+        toast.success('При удалении пользователя произошла ошибка');
+    });
+
     await load();
 }
 
@@ -123,10 +135,11 @@ async function onUserChangePass(user) {
         return;
     }
 
-    const res = (await axios.put(route('admin.users.list.change-user-pass', user.id), {password})).data;
-    if (res?.result) {
-        alert('Пароль успешно изменён.');
-    }
+    await axios.put(route('admin.users.list.change-user-pass', user.id), {password}).then(() => {
+        toast.success('Пароль пользователя успешно изменён');
+    }).catch(() => {
+        toast.success('При изменении пароля пользователя произошла ошибка');
+    });
 }
 
 async function onUserChangeName(user) {
@@ -135,7 +148,12 @@ async function onUserChangeName(user) {
         return;
     }
 
-    await axios.put(route('admin.users.list.change-user-name', user.id), {name});
+    await axios.put(route('admin.users.list.change-user-name', user.id), {name}).then(() => {
+        toast.success('Имя пользователя успешно изменено');
+    }).catch(() => {
+        toast.success('При изменении имени пользователя произошла ошибка');
+    });
+
     await load();
 }
 
