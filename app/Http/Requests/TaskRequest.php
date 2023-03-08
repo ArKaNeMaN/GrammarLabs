@@ -22,7 +22,7 @@ class TaskRequest extends FormRequest
                 TaskType::GENERATE => [
                     'params.required_str_count' => ['required', 'numeric', 'integer', 'min:1'],
                     'params.grammar.terms' => ['required', 'string', 'min:1', new CharsSet()],
-                    'params.grammar.non_terms' => ['required', 'string', 'min:1', new CharsSet(), new NotIncludedCharsFrom('terms')],
+                    'params.grammar.non_terms' => ['required', 'string', 'min:1', new CharsSet(), new NotIncludedCharsFrom('params.grammar.terms')],
                     'params.grammar.root_term' => ['required', 'string', 'size:1', new ContainsOnlyFrom('params.grammar.non_terms')],
                     'params.grammar.rules' => ['required', 'array', new GrammarRules("params.grammar.terms", 'params.grammar.non_terms', 'params.grammar.root_term')],
                 ],

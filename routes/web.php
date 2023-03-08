@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AssignedTasksController;
+use App\Http\Controllers\Admin\AssignedTaskController;
+use App\Http\Controllers\Admin\AssignedTasksListController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TasksListController;
 use App\Http\Controllers\Admin\UsersListController;
@@ -48,8 +49,15 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
     });
 
     Route::prefix('assigned-tasks')->group(static function () {
-        Route::get('list', [AssignedTasksController::class, 'show'])
+        Route::get('list', [AssignedTasksListController::class, 'show'])
             ->name('admin.assigned-tasks.list.show');
+        Route::delete('list/cancel-task/{assignedTask}', [AssignedTasksListController::class, 'cancel'])
+            ->name('admin.assigned-tasks.list.cancel-task');
+
+        Route::get('assign', [AssignedTaskController::class, 'show'])
+            ->name('admin.assigned-tasks.assign.show');
+
+        Route::post('assign', [AssignedTaskController::class, 'assign']);
     });
 
     Route::prefix('users')->group(static function () {
