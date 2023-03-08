@@ -15,9 +15,13 @@ return new class extends Migration
             $table->foreignId('assigned_task_id')
                 ->constrained('assigned_tasks');
 
+            $table->string('type')
+                ->index();
+
             $table->json('answer');
             $table->string('status')
-                ->default(AssignedTaskAnswerStatus::DRAFT->value);
+                ->default(AssignedTaskAnswerStatus::DRAFT->value)
+                ->index();
             $table->text('comment')
                 ->nullable();
 
