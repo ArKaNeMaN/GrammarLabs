@@ -54,7 +54,6 @@ class AssignedTaskController
         }
 
         AssignedTask::query()->create($data);
-
         Toast::success('Задание успешно назначено');
 
         if ($request->input('preserve_page', true)) {

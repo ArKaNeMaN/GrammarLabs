@@ -8,6 +8,7 @@ import {Inertia} from "@inertiajs/inertia";
 import {isEmpty} from "lodash";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
+import {dateFormat} from "@/utils";
 
 const props = defineProps({
     assignedTasks: {
@@ -71,7 +72,7 @@ function cancelTask(assignedTask) {
                         <td>{{ task.task.name }}</td>
 <!--                        <td>{{ task.answers.length }}</td>-->
                         <td>{{ formatStatus(getTaskStatus(task)) }}</td>
-                        <td>{{ task.user.name }}</td>
+                        <td>{{ dateFormat(task.created_at) }}</td>
                         <td class="flex">
                             <danger-button @click="cancelTask(task)">Отменить</danger-button>
                         </td>
