@@ -1,11 +1,11 @@
 <script setup>
 import PageTitle from "@/Components/PageTitle.vue";
-import CardBlock from "@/Components/CardBlock.vue";
-import DangerButton from "@/Components/DangerButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
+import DangerButton from "@/Components/Buttons/DangerButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
 import {Inertia} from "@inertiajs/inertia";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import {dateFormat} from "@/utils";
 

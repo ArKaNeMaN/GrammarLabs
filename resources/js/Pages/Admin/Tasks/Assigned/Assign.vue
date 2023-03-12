@@ -30,11 +30,11 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PageTitle from "@/Components/PageTitle.vue";
-import CardBlock from "@/Components/CardBlock.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
 import FormField from "@/Components/Form/FormField.vue";
 import SelectInput from "@/Components/Form/SelectInput.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Checkbox from "@/Components/Form/Checkbox.vue";
 
 const props = defineProps({

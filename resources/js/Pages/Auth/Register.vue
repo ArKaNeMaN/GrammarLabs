@@ -1,6 +1,6 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/Form/TextInput.vue';
 import {useForm} from '@inertiajs/inertia-vue3';
 import PageTitle from "@/Components/PageTitle.vue";

@@ -41,7 +41,7 @@ class AssignedTask extends Pivot
     public function lastAnswer(): HasOne
     {
         return $this->hasOne(TaskAnswer::class, 'assigned_task_id')
-            ->where('type', $this->task()->select('type'))
+            ->whereIn('type', $this->task()->select('type'))
             ->latestOfMany();
     }
 }

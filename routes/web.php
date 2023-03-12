@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Profile\ProfileEditController;
+use App\Http\Controllers\Tasks\Answers\AnswerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', MainController::class);
@@ -23,6 +24,23 @@ Route::middleware('auth')->group(static function () {
         ->name('user.profile.edit.show');
     Route::put('profile/edit', [ProfileEditController::class, 'save'])
         ->name('user.profile.edit.save');
+
+    Route::prefix('task/{assignedTask}')->group(static function () {
+        Route::get('answer', [AnswerController::class, 'show'])
+            ->name('tasks.answers.new.show');
+
+        Route::post('answer')
+            ->name('tasks.answers.new');
+
+        Route::get('answer/{taskAnswer}', [AnswerController::class, 'show'])
+            ->name('tasks.answers.edit.show');
+
+        Route::put('answer/{taskAnswer}')
+            ->name('tasks.answers.edit');
+
+        Route::put('answer/{taskAnswer}/send')
+            ->name('tasks.answers.send');
+    });
 
     Route::post('logout', [LoginController::class, 'logout'])
         ->name('logout');

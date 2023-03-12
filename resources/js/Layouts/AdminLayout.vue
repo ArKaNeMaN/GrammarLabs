@@ -24,8 +24,8 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import CardBlock from "@/Components/CardBlock.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
 
 const props = defineProps({

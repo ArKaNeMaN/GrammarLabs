@@ -2,7 +2,7 @@
 import {computed} from "vue";
 import {isEmpty} from "lodash";
 import TextInput from "@/Components/Form/TextInput.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 
 const props = defineProps({
     modelValue: {

@@ -54,10 +54,10 @@
 <script setup>
 import {useForm, usePage} from "@inertiajs/inertia-vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import CardBlock from "@/Components/CardBlock.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
 import FormField from "@/Components/Form/FormField.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import PageTitle from "@/Components/PageTitle.vue";
 import {useToast} from "vue-toastification";
 

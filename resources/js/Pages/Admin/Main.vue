@@ -1,7 +1,7 @@
 <script setup>
 import PageTitle from "@/Components/PageTitle.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import CardBlock from "@/Components/CardBlock.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
 
 </script>
 

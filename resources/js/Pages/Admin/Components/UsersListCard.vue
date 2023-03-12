@@ -67,14 +67,14 @@
 </template>
 
 <script setup>
-import CardBlock from "@/Components/CardBlock.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {dateFormat} from "@/utils";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
-import DangerButton from "@/Components/DangerButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import DangerButton from "@/Components/Buttons/DangerButton.vue";
 import {isEmpty} from "lodash";
 import Pagination from "@/Components/Navigation/Pagination.vue";
 import {useToast} from "vue-toastification";

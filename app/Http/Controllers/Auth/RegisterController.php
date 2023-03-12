@@ -23,7 +23,7 @@ class RegisterController
 
     public function register(Request $request): RedirectResponse
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'group_name' => ['required', 'string', 'max:255'],
             'login' => ['required', 'string', 'min:6', 'max:255', 'unique:'.User::class],
@@ -31,9 +31,8 @@ class RegisterController
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'login' => $request->login,
-            'password' => Hash::make($request->password),
+            ...$data,
+            'password' => Hash::make($data['password']),
             'role' => UserRole::STUDENT,
         ]);
 

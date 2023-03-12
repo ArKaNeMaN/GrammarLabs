@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -29,9 +30,8 @@ class User extends Authenticatable
         'role' => UserRole::class,
     ];
 
-    public function assignedTasks(): BelongsToMany
+    public function assignedTasks(): HasMany
     {
-        return $this->belongsToMany(Task::class)
-            ->using(AssignedTask::class);
+        return $this->hasMany(AssignedTask::class, 'user_id');
     }
 }

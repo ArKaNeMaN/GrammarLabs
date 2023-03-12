@@ -1,14 +1,15 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PageTitle from "@/Components/PageTitle.vue";
-import CardBlock from "@/Components/CardBlock.vue";
-import DangerButton from "@/Components/DangerButton.vue";
+import CardBlock from "@/Components/Card/CardBlock.vue";
+import DangerButton from "@/Components/Buttons/DangerButton.vue";
 import Pagination from "@/Components/Navigation/Pagination.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {isEmpty} from "lodash";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
 import {dateFormat} from "@/utils";
+import CardHeader from "@/Components/Card/CardHeader.vue";
 
 const props = defineProps({
     assignedTasks: {
@@ -19,8 +20,13 @@ const props = defineProps({
 
 function formatStatus(status) {
     return {
-        'null': '-',
-    }[status ?? 'null'];
+        'draft': 'Черновик',
+        'auto-rejected': 'Отклонено валидацией',
+        'sent': 'Сдано',
+        'accepted': 'Принято',
+        'rejected': 'Отклонено',
+        // 'null': 'Не сдано',
+    }[status] ?? 'Не сдано';
 }
 
 function getTaskStatus(assignedTask) {
@@ -46,13 +52,14 @@ function cancelTask(assignedTask) {
 
     <admin-layout>
         <card-block class="mt-4">
-            <div class="flex md:flex-row flex-col">
-                <h3 class="text-lg font-semibold">Список выданных заданий</h3>
-                <div class="flex-grow"></div>
-                <ln :href="route('admin.assigned-tasks.assign.show')">
-                    <primary-button>Выдать новое задание</primary-button>
-                </ln>
-            </div>
+            <card-header>
+                Список выданных заданий
+                <template #right>
+                    <ln :href="route('admin.assigned-tasks.assign.show')">
+                        <primary-button>Выдать новое задание</primary-button>
+                    </ln>
+                </template>
+            </card-header>
 
             <div class="overflow-auto">
                 <table class="table w-full mt-2">

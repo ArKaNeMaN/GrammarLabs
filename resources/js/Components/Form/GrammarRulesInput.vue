@@ -1,6 +1,6 @@
 <script setup>
 import {isEmpty} from "lodash";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
 import TextInputsList from "@/Components/Form/TextInputsList.vue";
 import {ref, watch} from "vue";

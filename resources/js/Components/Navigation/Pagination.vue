@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 
 const props = defineProps({
     data: {
