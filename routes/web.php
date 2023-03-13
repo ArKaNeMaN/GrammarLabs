@@ -29,13 +29,13 @@ Route::middleware('auth')->group(static function () {
         Route::get('answer', [AnswerController::class, 'show'])
             ->name('tasks.answers.new.show');
 
-        Route::post('answer')
+        Route::post('answer', [AnswerController::class, 'save'])
             ->name('tasks.answers.new');
 
         Route::get('answer/{taskAnswer}', [AnswerController::class, 'show'])
             ->name('tasks.answers.edit.show');
 
-        Route::put('answer/{taskAnswer}')
+        Route::put('answer/{taskAnswer}', [AnswerController::class, 'save'])
             ->name('tasks.answers.edit');
 
         Route::put('answer/{taskAnswer}/send')

@@ -24,24 +24,6 @@ class AssignedTaskController
 
     public function assign(AssignedTaskRequest $request, Task $task): RedirectResponse
     {
-        // TODO: Это не сюда надо))
-//        $data = $request->validate([
-//            'answer' => ['required', 'array'],
-//            ...match ($task->type) {
-//                TaskType::GENERATE => [
-//                    'answer.input_strings' => ['required', 'array', 'min:1'],
-//                    'answer.input_strings.*' => ['required', 'string', 'min:1'],
-//                ],
-//                TaskType::REVERSE => [
-//                    'answer.grammar.terms' => ['required', 'string', 'min:1', new CharsSet()],
-//                    'answer.grammar.non_terms' => ['required', 'string', 'min:1', new CharsSet(), new NotIncludedCharsFrom('answer.grammar.terms')],
-//                    'answer.grammar.root_term' => ['required', 'string', 'size:1', new ContainsOnlyFrom('answer.grammar.non_terms')],
-//                    'answer.grammar.rules' => ['required', 'array', new GrammarRules("answer.grammar.terms", 'answer.grammar.non_terms', 'answer.grammar.root_term')],
-//                ],
-//                default => [],
-//            },
-//        ]);
-
         $data = $request->validated();
         $exists = AssignedTask::query()
             ->where('user_id', $data['user_id'])

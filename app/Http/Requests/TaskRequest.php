@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\TaskType;
+use App\Http\Validation\Rules\ArrayOfNonEmpty;
 use App\Http\Validation\Rules\CharsSet;
 use App\Http\Validation\Rules\ContainsOnlyFrom;
 use App\Http\Validation\Rules\GrammarRules;
@@ -27,8 +28,7 @@ class TaskRequest extends FormRequest
                     'params.grammar.rules' => ['required', 'array', new GrammarRules("params.grammar.terms", 'params.grammar.non_terms', 'params.grammar.root_term')],
                 ],
                 TaskType::REVERSE => [
-                    'params.input_strings' => ['required', 'array', 'min:1'],
-                    'params.input_strings.*' => ['required', 'string', 'min:1'],
+                    'params.input_strings' => ['required', 'array', 'min:1', new ArrayOfNonEmpty()],
                 ],
                 default => [],
             },

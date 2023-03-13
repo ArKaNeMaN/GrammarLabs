@@ -14,7 +14,7 @@ defineProps({
         class="absolute top-0 bottom-0 left-0 right-0 bg-gray-500/20 z-[9999] flex flex-col items-center justify-center"
         style="margin: 0;"
     >
-        <div class="flex items-center flex-col p-4 space-y-2 rounded-lg bg-black/10">
+        <div class="flex items-center flex-col p-4 space-y-2 rounded-lg ">
             <span>Загрузка</span>
             <svg
                 class="w-8 fill-black/80 animate-spin"

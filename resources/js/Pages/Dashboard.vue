@@ -87,11 +87,11 @@ function sendAnswer(answer) {
                 <tbody v-if="!isEmpty(answers)">
                 <tr v-for="answer in answers">
                     <td>{{ answer.id }}</td>
-                    <td>{{ answer.assignedTask.task.name }}</td>
+                    <td>{{ answer.assigned_task.task.name }}</td>
                     <td>{{ dateFormat(answer.updated_at) }}</td>
                     <td>{{ taskStatusFormat(answer.status) }}</td>
                     <td class="flex space-x-2">
-                        <ln :href="route('tasks.answers.edit.show', [answer.assignedTask.id, answer.id])">
+                        <ln :href="route('tasks.answers.edit.show', [answer.assigned_task.id, answer.id])">
                             <secondary-button>Перейти</secondary-button>
                         </ln>
                         <primary-button

@@ -14,6 +14,8 @@ import GrammarRulesInput from "@/Components/Form/GrammarRulesInput.vue";
 import CardHeader from "@/Components/Card/CardHeader.vue";
 import CardLoadingIndicator from "@/Components/Card/CardLoadingIndicator.vue";
 import TableLayout from "@/Components/Table/TableLayout.vue";
+import Ln from "@/Components/Navigation/ln.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 
 const props = defineProps({
     assignedTask: {
@@ -52,8 +54,12 @@ const DEFAULT_REVERS_ANSWER = {
 };
 
 const form = useForm({
-    ...DEFAULT_GENERATION_ANSWER,
-    ...DEFAULT_REVERS_ANSWER,
+    ...props.answer,
+    answer: {
+        ...DEFAULT_GENERATION_ANSWER,
+        ...DEFAULT_REVERS_ANSWER,
+        ...props.answer?.answer,
+    },
 });
 
 function onSubmit() {
@@ -77,6 +83,12 @@ function taskTypeFormat(type) {
     <page-title :title="title"/>
     <authenticated-layout :header="title">
         <card-block class="mt-4">
+            <ln :href="route('dashboard')">
+                <secondary-button>← На главную</secondary-button>
+            </ln>
+        </card-block>
+
+        <card-block class="mt-4">
             <card-header>Задание</card-header>
             <table-layout class="lg:w-1/3 sm:w-1/2 w-full">
                 <tbody>
@@ -90,10 +102,11 @@ function taskTypeFormat(type) {
                 </tr>
                 </tbody>
             </table-layout>
-
-
+            <!--TODO: Добавить описание задания-->
         </card-block>
-        <form>
+
+
+        <form @submit.prevent="onSubmit">
             <card-block class="mt-2 space-y-4">
                 <card-header>Решение</card-header>
                 <card-loading-indicator :loading="form.processing"/>
@@ -106,8 +119,8 @@ function taskTypeFormat(type) {
                         >
                             <text-input
                                 class="w-full"
-                                v-model.trim="form.grammar.terms"
-                                :error="form.errors['grammar.terms']"
+                                v-model.trim="form.answer.grammar.terms"
+                                :error="form.errors['answer.grammar.terms']"
                                 placeholder="Введите терминальные символы без разделителей"
                                 required
                             />
@@ -119,8 +132,8 @@ function taskTypeFormat(type) {
                         >
                             <text-input
                                 class="w-full"
-                                v-model.trim="form.grammar.non_terms"
-                                :error="form.errors['grammar.non_terms']"
+                                v-model.trim="form.answer.grammar.non_terms"
+                                :error="form.errors['answer.grammar.non_terms']"
                                 placeholder="Введите нетерминальные символы без разделителей"
                                 required
                             />
@@ -129,8 +142,8 @@ function taskTypeFormat(type) {
                         <form-field label="Стартовый нетерминал">
                             <text-input
                                 class="w-full"
-                                v-model.trim="form.grammar.root_term"
-                                :error="form.errors['grammar.root_term']"
+                                v-model.trim="form.answer.grammar.root_term"
+                                :error="form.errors['answer.grammar.root_term']"
                                 placeholder="Введите стартовый нетерминальный символ"
                                 required
                                 maxlength="1"
@@ -145,8 +158,8 @@ function taskTypeFormat(type) {
                         hint="Символ '-' в правой части означает пустую строку"
                     >
                         <grammar-rules-input
-                            v-model="form.grammar.rules"
-                            :error="form.errors['grammar.rules']"
+                            v-model="form.answer.grammar.rules"
+                            :error="form.errors['answer.grammar.rules']"
                             class="w-full"
                         />
                     </form-field>
@@ -157,8 +170,8 @@ function taskTypeFormat(type) {
                         hint="Строки, соответствующие заданной грамматике"
                     >
                         <text-inputs-list
-                            v-model="form.input_strings"
-                            :error="form.errors['input_strings']"
+                            v-model="form.answer.input_strings"
+                            :error="form.errors['answer.input_strings']"
                         />
                     </form-field>
                 </template>
