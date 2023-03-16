@@ -32,14 +32,18 @@ Route::middleware('auth')->group(static function () {
         Route::post('answer', [AnswerController::class, 'save'])
             ->name('tasks.answers.new');
 
+        // TODO: Добавить проверку на соответствие решения заданию
         Route::get('answer/{taskAnswer}', [AnswerController::class, 'show'])
             ->name('tasks.answers.edit.show');
 
         Route::put('answer/{taskAnswer}', [AnswerController::class, 'save'])
             ->name('tasks.answers.edit');
 
-        Route::put('answer/{taskAnswer}/send')
+        Route::put('answer/{taskAnswer}/send', [AnswerController::class, 'send'])
             ->name('tasks.answers.send');
+
+        Route::delete('answer/{taskAnswer}/remove', [AnswerController::class, 'remove'])
+            ->name('tasks.answers.remove');
     });
 
     Route::post('logout', [LoginController::class, 'logout'])

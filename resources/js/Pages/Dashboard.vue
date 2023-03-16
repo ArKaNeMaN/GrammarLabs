@@ -12,6 +12,7 @@ import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {isEmpty} from "lodash";
 import TableTextRow from "@/Components/Table/TableTextRow.vue";
+import DangerButton from "@/Components/Buttons/DangerButton.vue";
 
 const props = defineProps({
     assignedTasks: {
@@ -38,7 +39,19 @@ function taskStatusFormat(status) {
 }
 
 function sendAnswer(answer) {
-    Inertia.put(route('tasks.answers.send', answer.id));
+    if (!confirm(`Отправить решение №${answer.id} задания '${answer.assigned_task.task.name}' на проверку? После отправки решение нельзя будет редактировать.`)) {
+        return;
+    }
+
+    Inertia.put(route('tasks.answers.send', [answer.assigned_task_id, answer.id]));
+}
+
+function removeAnswer(answer) {
+    if (!confirm(`Удалить решение №${answer.id} задания '${answer.assigned_task.task.name}'? Данное действия нельзя будет отменить.`)) {
+        return;
+    }
+
+    Inertia.delete(route('tasks.answers.remove', [answer.assigned_task_id, answer.id]));
 }
 
 </script>
@@ -94,13 +107,17 @@ function sendAnswer(answer) {
                         <td>{{ dateFormat(answer.updated_at) }}</td>
                         <td>{{ taskStatusFormat(answer.status) }}</td>
                         <td class="flex space-x-2">
-                            <ln :href="route('tasks.answers.edit.show', [answer.assigned_task.id, answer.id])">
+                            <ln :href="route('tasks.answers.edit.show', [answer.assigned_task_id, answer.id])">
                                 <secondary-button>Перейти</secondary-button>
                             </ln>
                             <primary-button
                                 v-if="answer.status === 'draft'"
                                 @click="sendAnswer(answer)"
                             >Сдать</primary-button>
+                            <danger-button
+                                v-if="answer.status === 'draft'"
+                                @click="removeAnswer(answer)"
+                            >Удалить</danger-button>
                         </td>
                     </tr>
                     </tbody>
