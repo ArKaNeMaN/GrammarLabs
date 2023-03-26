@@ -8,7 +8,7 @@ import {Inertia} from "@inertiajs/inertia";
 import {isEmpty} from "lodash";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Ln from "@/Components/Navigation/ln.vue";
-import {dateFormat} from "@/utils";
+import {answerStatusFormat, dateFormat} from "@/utils";
 import CardHeader from "@/Components/Card/CardHeader.vue";
 
 const props = defineProps({
@@ -17,17 +17,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-function formatStatus(status) {
-    return {
-        'draft': 'Черновик',
-        'auto-rejected': 'Отклонено валидацией',
-        'sent': 'Сдано',
-        'accepted': 'Принято',
-        'rejected': 'Отклонено',
-        // 'null': 'Не сдано',
-    }[status] ?? 'Не сдано';
-}
 
 function getTaskStatus(assignedTask) {
     if (!assignedTask.answers?.length) {
@@ -78,7 +67,7 @@ function cancelTask(assignedTask) {
                         <td>{{ task.user.name }}</td>
                         <td>{{ task.task.name }}</td>
 <!--                        <td>{{ task.answers.length }}</td>-->
-                        <td>{{ formatStatus(getTaskStatus(task)) }}</td>
+                        <td>{{ answerStatusFormat(getTaskStatus(task)) }}</td>
                         <td>{{ dateFormat(task.created_at) }}</td>
                         <td class="flex">
                             <danger-button @click="cancelTask(task)">Отменить</danger-button>

@@ -38,6 +38,10 @@ const props = defineProps({
 
 const ADMIN_MENU_ITEMS = [
     {
+        title: 'Главная',
+        route: 'admin.main',
+    },
+    {
         title: 'Пользователи',
         route: 'admin.users.list.show',
     },

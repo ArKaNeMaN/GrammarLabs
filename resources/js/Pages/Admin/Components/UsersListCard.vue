@@ -143,7 +143,7 @@ async function onUserChangePass(user) {
 }
 
 async function onUserChangeName(user) {
-    const name = prompt('Введите новое имя:');
+    const name = prompt('Введите новое имя:', user.name);
     if (isEmpty(name)) {
         return;
     }

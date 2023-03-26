@@ -101,7 +101,14 @@ function removeAnswer(answer) {
                         'Действия',
                     ]"/>
                     <tbody v-if="!isEmpty(answers)">
-                    <tr v-for="answer in answers">
+                    <tr
+                        v-for="answer in answers"
+                        :key="answer.id"
+                        :class="{
+                            'bg-green-500/10': answer.status === 'accepted',
+                            'bg-red-500/10': answer.status === 'rejected',
+                        }"
+                    >
                         <td>{{ answer.id }}</td>
                         <td>{{ answer.assigned_task.task.name }}</td>
                         <td>{{ dateFormat(answer.updated_at) }}</td>

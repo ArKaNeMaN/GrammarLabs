@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\AssignedTaskAnswerStatus;
+use App\Enums\AnswerStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +19,12 @@ return new class extends Migration
                 ->index();
 
             $table->json('answer');
+            $table->string('auto_test_result')
+                ->nullable()
+                ->index();
+
             $table->string('status')
-                ->default(AssignedTaskAnswerStatus::DRAFT->value)
+                ->default(AnswerStatus::DRAFT->value)
                 ->index();
             $table->text('comment')
                 ->nullable();

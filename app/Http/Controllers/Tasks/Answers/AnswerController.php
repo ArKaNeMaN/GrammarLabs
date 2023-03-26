@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Tasks\Answers;
 
 use App\Actions\SendAnswerAction;
-use App\Enums\AssignedTaskAnswerStatus;
+use App\Enums\AnswerStatus;
 use App\Enums\TaskType;
 use App\Exceptions\Tasks\Answers\AnswerAlreadySentException;
 use App\Http\Validation\Rules\ArrayOfNonEmpty;
@@ -82,8 +82,8 @@ class AnswerController
 
             $taskAnswer->assigned_task_id = $assignedTask->id;
             $taskAnswer->type = $assignedTask->task->type;
-            $taskAnswer->status = AssignedTaskAnswerStatus::DRAFT;
-        } elseif ($taskAnswer->status !== AssignedTaskAnswerStatus::DRAFT) {
+            $taskAnswer->status = AnswerStatus::DRAFT;
+        } elseif ($taskAnswer->status !== AnswerStatus::DRAFT) {
             Toast::error('Нельзя редактировать отправленные на проверку решения');
             return redirect()->back();
         }

@@ -12,7 +12,7 @@
 
                 <form-field label="Задание" hint="Выдаваемое задание">
                     <select-input v-model="form.task_id" required>
-                        <option v-for="task in tasks" :key="task.id" :value="task.id">{{ task.name }} ({{ formatTaskType(task.type) }})</option>
+                        <option v-for="task in tasks" :key="task.id" :value="task.id">{{ task.name }} ({{ taskTypeFormat(task.type) }})</option>
                     </select-input>
                 </form-field>
             </card-block>
@@ -36,6 +36,7 @@ import SelectInput from "@/Components/Form/SelectInput.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Checkbox from "@/Components/Form/Checkbox.vue";
+import {taskTypeFormat} from "@/utils";
 
 const props = defineProps({
     users: {
@@ -47,14 +48,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-function formatTaskType(type) {
-    return {
-        generate: 'Генерация',
-        reverse: 'Реверс',
-        null: '?',
-    }[type ?? 'null'];
-}
 
 const form = useForm({
     user_id: null,

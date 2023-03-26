@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Enums\AssignedTaskAnswerStatus;
+use App\Enums\AnswerStatus;
 use App\Exceptions\Tasks\Answers\AnswerAlreadySentException;
 use App\Models\TaskAnswer;
 
@@ -13,11 +13,11 @@ class SendAnswerAction
      */
     public function __invoke(TaskAnswer $answer): void
     {
-        if ($answer->status !== AssignedTaskAnswerStatus::DRAFT) {
+        if ($answer->status !== AnswerStatus::DRAFT) {
             throw new AnswerAlreadySentException();
         }
 
-        $answer->status = AssignedTaskAnswerStatus::SENT;
+        $answer->status = AnswerStatus::SENT;
         $answer->save();
 
         // TODO: Либо через ивент, либо прям тут запускать джобу валидации грамматикой

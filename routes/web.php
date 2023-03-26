@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AssignedTaskController;
 use App\Http\Controllers\Admin\AssignedTasksListController;
+use App\Http\Controllers\Admin\TaskAnswerController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TasksListController;
 use App\Http\Controllers\Admin\UsersListController;
@@ -54,6 +55,19 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
     Route::get('/', AdminController::class)
         ->name('admin.main');
 
+    Route::prefix('users')->group(static function () {
+        Route::get('list', [UsersListController::class, 'show'])
+            ->name('admin.users.list.show');
+        Route::get('list/data', UsersListController::class)
+            ->name('admin.users.list');
+        Route::delete('list/{user}', [UsersListController::class, 'removeUser'])
+            ->name('admin.users.list.remove-user');
+        Route::put('list/{user}/name', [UsersListController::class, 'changeUserName'])
+            ->name('admin.users.list.change-user-name');
+        Route::put('list/{user}/pass', [UsersListController::class, 'changeUserPass'])
+            ->name('admin.users.list.change-user-pass');
+    });
+
     Route::prefix('tasks')->group(static function () {
         Route::get('list', [TasksListController::class, 'show'])
             ->name('admin.tasks.list.show');
@@ -82,17 +96,15 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(static function
         Route::post('assign', [AssignedTaskController::class, 'assign']);
     });
 
-    Route::prefix('users')->group(static function () {
-        Route::get('list', [UsersListController::class, 'show'])
-            ->name('admin.users.list.show');
-        Route::get('list/data', UsersListController::class)
-            ->name('admin.users.list');
-        Route::delete('list/{user}', [UsersListController::class, 'removeUser'])
-            ->name('admin.users.list.remove-user');
-        Route::put('list/{user}/name', [UsersListController::class, 'changeUserName'])
-            ->name('admin.users.list.change-user-name');
-        Route::put('list/{user}/pass', [UsersListController::class, 'changeUserPass'])
-            ->name('admin.users.list.change-user-pass');
+    Route::prefix('answers/{taskAnswer}')->group(static function () {
+        Route::get('/', [TaskAnswerController::class, 'show'])
+            ->name('admin.answers.show');
+
+        Route::put('/accept', [TaskAnswerController::class, 'accept'])
+            ->name('admin.answers.accept');
+
+        Route::put('/reject', [TaskAnswerController::class, 'reject'])
+            ->name('admin.answers.reject');
     });
 });
 
