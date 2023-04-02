@@ -11,6 +11,7 @@ class ReverseParams extends Data
      */
     public function __construct(
         public array $input_strings,
+//        public array $fail_strings,
     ) {
     }
 }

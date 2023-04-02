@@ -2,6 +2,7 @@
 
 namespace App\Grammars\DTO;
 
+use App\Infrastructure\Set;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\Validation\Max;
 use Spatie\LaravelData\Data;
@@ -9,6 +10,8 @@ use Spatie\LaravelData\DataCollection;
 
 class Grammar extends Data
 {
+    public const NULL_TERM = '%';
+
     /**
      * @param  string  $non_terms
      * @param  string  $terms
@@ -23,5 +26,21 @@ class Grammar extends Data
         #[DataCollectionOf(GrammarRule::class)]
         public DataCollection $rules,
     ) {
+    }
+
+    /**
+     * @return Set<string>
+     */
+    public function getTermsSet(): Set
+    {
+        return new Set(str_split($this->terms));
+    }
+
+    /**
+     * @return Set<string>
+     */
+    public function getNonTermsSet(): Set
+    {
+        return new Set(str_split($this->non_terms));
     }
 }

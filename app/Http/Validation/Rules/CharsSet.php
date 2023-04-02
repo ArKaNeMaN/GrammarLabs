@@ -14,8 +14,8 @@ class CharsSet implements ValidationRule
             return;
         }
 
-        if (!preg_match('/^[a-zA-Z1-9]+$/i', $value)) {
-            $fail('Значение :attribute должно состоять только из латинских символов и/или цифр.');
+        if (!preg_match('/^[a-zA-Z0-9()+\-*\/,.]+$/i', $value)) {
+            $fail('Значение :attribute должно состоять только из латинских символов и/или цифр и некоторых спец. символов.');
             return;
         }
 

@@ -4,7 +4,7 @@ namespace App\Grammars;
 
 use App\Grammars\DTO\Grammar;
 
-class GrammarsValidator
+class GrammarsRunner
 {
     /**
      * @var array<string, string>

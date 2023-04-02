@@ -8,7 +8,7 @@ use Spatie\LaravelData\Data;
 class ReverseAnswer extends Data
 {
     /**
-     * @param  string[]  $input_strings
+     * @param  Grammar  $grammar
      */
     public function __construct(
         public Grammar $grammar,
