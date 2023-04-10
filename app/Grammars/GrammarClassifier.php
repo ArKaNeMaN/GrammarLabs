@@ -33,13 +33,10 @@ class GrammarClassifier
         }
     }
 
-
     private function isRegular(): bool
     {
-        foreach ($this->lefts as $left) {
-            if (mb_strlen($left) > 1) {
-                return false;
-            }
+        if ($this->isLeftBiggerThan(1)) {
+            return false;
         }
 
         $prevDir = null;
@@ -92,6 +89,62 @@ class GrammarClassifier
         return true;
     }
 
+    private function isContextFree(): bool
+    {
+        if ($this->isLeftBiggerThan(1)) {
+            return false;
+        }
+
+        foreach ($this->rights as $right) {
+            if (mb_strlen($right) < 2) {
+                continue;
+            }
+
+            $prevIsTerm = null;
+            $changes = 0;
+            for ($i = 0, $ii = mb_strlen($right); $i < $ii; $i++) {
+                $isTerm = $this->isTerm($right[$i]);
+
+                if ($prevIsTerm === null) {
+                    $prevIsTerm = $isTerm;
+                    continue;
+                }
+
+                if ($isTerm === $prevIsTerm) {
+                    continue;
+                }
+
+                if ($changes >= 2) {
+                    // Если тут переход от одного типа символов к другому
+                    // и ранее уже было 2 таких перехода, то это не КС грамматика
+                    return false;
+                }
+
+                $changes++;
+                $prevIsTerm = $isTerm;
+            }
+        }
+
+        return true;
+    }
+
+    private function isContextSensitive(): bool
+    {
+        // TODO: ...
+        // А надо ли оно вообще?)
+        return true;
+    }
+
+    private function isLeftBiggerThan(int $than): bool
+    {
+        foreach ($this->lefts as $left) {
+            if (mb_strlen($left) > $than) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private function isTerm(string $char): bool
     {
         return $this->termsSet->contains($char);
@@ -101,8 +154,16 @@ class GrammarClassifier
     {
         if ($this->isRegular()) {
             return GrammarType::REGULAR;
-        } else {
+        }
+
+        if ($this->isContextFree()) {
             return GrammarType::CONTEXT_FREE;
-        } // TODO: ...
+        }
+
+        if ($this->isContextSensitive()) {
+            return GrammarType::CONTEXT_SENSITIVE;
+        }
+
+        return GrammarType::UNRESTRICTED;
     }
 }

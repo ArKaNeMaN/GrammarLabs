@@ -61,7 +61,7 @@ class GrammarRules implements ValidationRule, DataAwareRule
             $lefts[$rule['left']] = true;
 
             $hasNonTerm = false;
-            foreach (str_split($rule['left']) as $char) {
+            foreach (str_split($rule['left']) as $char) { // счётчик по строке быстрее
                 $charType = $charsMap[$char] ?? null;
                 if (empty($charType)) {
                     $fail("Поля left элементов массива :attribute должны содержать только символы из значений $this->termsKey и $this->nonTermsKey.");
@@ -70,22 +70,6 @@ class GrammarRules implements ValidationRule, DataAwareRule
 
                 if ($charType === 'nonTerm') {
                     $hasNonTerm = true;
-                }
-            }
-
-            foreach ($rule['rights'] as $right) {
-                if (!is_string($right)) {
-                    $fail("Элементы массива rights элементов массива :attribute должны являться строками.");
-                    return;
-                }
-
-                if ($right !== '-') {
-                    foreach (str_split($right) as $char) {
-                        if (empty($charsMap[$char] ?? null)) {
-                            $fail("Элементы массива rights элементов массива :attribute должны содержать только символы из значений $this->termsKey и $this->nonTermsKey.");
-                            return;
-                        }
-                    }
                 }
             }
 
@@ -98,6 +82,21 @@ class GrammarRules implements ValidationRule, DataAwareRule
                 $hasRuleForRoot = true;
             }
 
+            foreach ($rule['rights'] as $right) {
+                if (!is_string($right)) {
+                    $fail("Элементы массива rights элементов массива :attribute должны являться строками.");
+                    return;
+                }
+
+                if ($right !== '-') {
+                    foreach (str_split($right) as $char) { // счётчик по строке быстрее
+                        if (empty($charsMap[$char] ?? null)) {
+                            $fail("Элементы массива rights элементов массива :attribute должны содержать только символы из значений $this->termsKey и $this->nonTermsKey.");
+                            return;
+                        }
+                    }
+                }
+            }
         }
 
         if (!$hasRuleForRoot) {
