@@ -1,9 +1,12 @@
 @echo off
 
+echo %CD%
+
 call resources\run\scripts\config
 
 echo Update/Install composer packages...
 echo.
+echo %COMPOSER_EXECUTABLE%
 %COMPOSER_EXECUTABLE% install
 
 echo Update/Install node modules...
