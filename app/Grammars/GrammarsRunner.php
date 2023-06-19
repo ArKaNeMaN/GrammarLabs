@@ -3,15 +3,18 @@
 namespace App\Grammars;
 
 use App\Grammars\DTO\Grammar;
+use App\Grammars\DTO\GrammarRule;
 use App\Grammars\Enums\GrammarType;
 use App\Grammars\Exceptions\UnsupportedGrammarTypeException;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
+use Spatie\LaravelData\DataCollection;
 
 class GrammarsRunner
 {
     /**
-     * @var array<string, string>
+     * @var array<array{left: string, right: string}>
      */
-    protected readonly array $rulesMap;
+    protected readonly array $rulesList;
     protected readonly GrammarClassifier $grammarClassifier;
     protected readonly GrammarType $grammarType;
 
@@ -28,17 +31,23 @@ class GrammarsRunner
             throw new UnsupportedGrammarTypeException();
         }
 
+        $rules = [];
         foreach ($this->grammar->rules as $rule) {
             foreach ($rule->rights as $right) {
-                // TODO: А не наоборот ли?) (лень сейчас думать, надо потом не забыть)
-                $this->rulesMap[$right] = $rule->left;
+                $rules[] = [
+                    'left' => $rule->left,
+                    'right' => $right,
+                ];
             }
         }
+        $this->rulesList = $rules;
     }
 
     public function validate(string $str): bool
     {
-        // TODO: ...
+//        foreach ($this->rulesList as $rule) {
+//            substr_replace();
+//        }
 
         return false;
     }

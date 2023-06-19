@@ -74,7 +74,7 @@ class GrammarRules implements ValidationRule, DataAwareRule
             }
 
             if (!$hasNonTerm) {
-                $fail("В значении :attribute должно присутствовать правило для $this->rootTermKey.");
+                $fail("В значении :attribute должен присутствовать хотя бы один символ из значения $this->nonTermsKey.");
                 return;
             }
 
